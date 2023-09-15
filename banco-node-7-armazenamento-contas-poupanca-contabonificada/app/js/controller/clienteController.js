@@ -1,30 +1,31 @@
-class clienteController {
+class ClienteController {
     constructor() {
-        this.inputNumero =
-            document.querySelector("#conta");
-        this.inputSaldo =
-            document.querySelector("#saldo");
-        this.contas = new Contas();
+        this.inputNome =
+            document.querySelector("#nome");
+        this.inputCpf =
+            document.querySelector("#cpf");
+        this.clientes = new Clientes();
     }
     inserir(evento) {
         evento.preventDefault();
-        let novaConta = new Conta(this.inputNumero.value, parseFloat(this.inputSaldo.value));
-        this.contas.inserir(novaConta);
-        this.inserirContaNoHTML(novaConta);
+        let novoCliente = new Cliente(this.inputNome.value, this.inputCpf.value);
+        this.clientes.inserir(novoCliente);
+        this.inserirClienteNoHTML(novoCliente);
+
     }
     listar() {
-        this.contas.listar().forEach(conta => {
-            this.inserirContaNoHTML(conta);
+        this.clientes.listar().forEach(cliente => {
+            this.inserirClienteNoHTML(cliente);
         });
     }
-    inserirContaNoHTML(conta) {
+    inserirClienteNoHTML(cliente) {
         const elementoP = document.createElement('p');
-        elementoP.textContent = conta.toString();
+        elementoP.textContent = cliente.toString();
         const botaoApagar = document.createElement('button');
         botaoApagar.textContent = 'X';
         botaoApagar.addEventListener('click', (event) => {
-            console.log('removendo conta ' + conta.toString());
-            this.contas.remover(conta.numero);
+            console.log('removendo cliente ' + cliente.toString());
+            this.clientes.remover(cliente._cpf);
             event.target.parentElement.remove();
         });
         elementoP.appendChild(botaoApagar);
